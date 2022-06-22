@@ -5,9 +5,9 @@ on: [push]
 jobs:
   
   build:
-    env:
+    env: 
       version: v0.0.0.${{github.run_id}}
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
      
     
     steps:
@@ -19,8 +19,8 @@ jobs:
 
     - name: Create a zip file
       run: git archive --format=zip --output=${{env.version}}.zip main lib
-      
+
     - name: Push the corresponding artifact to JFrog
-      run: curl -H "X-JFrog-Art-Api:${{ secrets.JF_ARTIFACTORY_API_KEY }}" -T ${{env.version}}.zip "https://luistorrescisneros.jfrog.io/artifactory/default-generic-local/${{github.repository}}/${{env.version}}.zip"
+      run: curl.exe -H "X-JFrog-Art-Api:${{ secrets.JF_ARTIFACTORY_API_KEY }}" -T ${{env.version}}.zip "https://luistorrescisneros.jfrog.io/artifactory/default-generic-local/${{github.repository}}/${{env.version}}.zip"
 
     
