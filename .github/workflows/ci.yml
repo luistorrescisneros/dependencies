@@ -22,6 +22,6 @@ jobs:
 
     # Trigger pipeline
     - name: Push the corresponding artifact to JFrog
-      run: curl -H "X-JFrog-Art-Api:${{ secrets.JF_ARTIFACTORY_API_KEY }}" -T ${{env.version}}.zip "https://luistorrescisneros.jfrog.io/artifactory/default-generic-local/${{github.repository}}/lib_jfrog.zip"
+      run: curl -H "X-JFrog-Art-Api:${{ secrets.JF_ARTIFACTORY_API_KEY }}" -T ${{env.version}}.zip "https://luistorrescisneros.jfrog.io/artifactory/default-generic-local/${{github.repository}}/${{env.version}}.zip"
 
     
