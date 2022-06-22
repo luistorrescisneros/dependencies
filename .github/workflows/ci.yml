@@ -4,7 +4,7 @@ on: [push]
 
 jobs:
   build:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     
     steps:
     - name: Checkout in self-hosted runner
@@ -13,21 +13,21 @@ jobs:
     - name: Print a Hello workflow   
       run: echo "Hello workflow!"
 
-    #- name: Create a zip file
-    #  run: git archive --format=zip --output=lib_jfrog.zip main lib
+    - name: Create a zip file
+      run: git archive --format=zip --output=v0.0.0.${{github.job_id}}.zip main lib
 
-    #- name: Push the corresponding artifact to JFrog
-    #  run: curl.exe -H "X-JFrog-Art-Api:${{ secrets.JF_ARTIFACTORY_API_KEY }}" -T lib_jfrog.zip "https://luistorrescisneros.jfrog.io/artifactory/default-generic-local/${{github.repository}}/lib_jfrog.zip"
+    - name: Push the corresponding artifact to JFrog
+      run: curl.exe -H "X-JFrog-Art-Api:${{ secrets.JF_ARTIFACTORY_API_KEY }}" -T lib_jfrog.zip "https://luistorrescisneros.jfrog.io/artifactory/default-generic-local/${{github.repository}}/lib_jfrog.zip"
 
-    - name: Retrieve artifact from JFrog
-      run: curl.exe -H "X-JFrog-Art-Api:${{ secrets.JF_ARTIFACTORY_API_KEY }}" -O "https://luistorrescisneros.jfrog.io/artifactory/default-generic-local/luistorrescisneros/generic-repo-test/lib_jfrog.zip"   
+    #- name: Retrieve artifact from JFrog
+    #  run: curl.exe -H "X-JFrog-Art-Api:${{ secrets.JF_ARTIFACTORY_API_KEY }}" -O "https://luistorrescisneros.jfrog.io/artifactory/default-generic-local/luistorrescisneros/generic-repo-test/lib_jfrog.zip"   
 
-    - name: Create a build dir and compile code
-      run: |
-        mkdir build
-        cd build
-        cmake.exe -G "MinGW Makefiles" ..
-        mingw32-make.exe
+    #- name: Create a build dir and compile code
+    #  run: |
+    #    mkdir build
+    #    cd build
+    #    cmake.exe -G "MinGW Makefiles" ..
+    #    mingw32-make.exe
         
     #- name: test CMake
     #  run: cmake.exe --help
@@ -36,5 +36,5 @@ jobs:
     #  run: mingw32-make.exe -h
 
     # Trigger pipeline
-    - name: Run application
-      run: .\build\app\app.exe
+    #- name: Run application
+    #  run: .\build\app\app.exe
